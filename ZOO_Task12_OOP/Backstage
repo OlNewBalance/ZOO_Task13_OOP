@@ -1,0 +1,15 @@
+namespace Task12;
+
+public class Backstage
+{
+    internal readonly Random _random = new Random();
+    public List<Animal> AviaryList = new List<Animal>();
+    public AviaryMethods aviaryMethods { get; set; }
+    public AnimalsRender animalsRender { get; set; }
+
+    public Backstage()
+    {
+        aviaryMethods = new AviaryMethods();
+        animalsRender = new AnimalsRender();
+    }
+}
