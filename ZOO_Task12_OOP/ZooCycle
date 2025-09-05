@@ -1,1 +1,109 @@
+namespace Task12;
 
+public class ZooCycle
+{
+    private Backstage _backstage;
+        public ZooCycle()
+        {
+            _backstage = new Backstage();
+            
+        }
+        
+
+        public void Start()
+        {
+            Console.WriteLine($"C# Version: {System.Environment.Version}");
+            Console.WriteLine("Начать? ENTER");
+            string input = Console.ReadLine();
+            if (input.ToLower() == "")
+            {
+                Choice();
+            }
+        }
+
+        public void Choice()
+        {
+            Console.Clear();
+            Console.WriteLine("Крч вот зоопарк, да? Хошь не хошь войти? ENTER");
+            string input = Console.ReadLine();
+            if (input.ToLower() == "")
+            {
+                while (true)
+                {
+                    Console.WriteLine("Выбирай, на кого хочешь позырить...");
+                    Console.WriteLine("1. Тигрята.");
+                    Console.WriteLine("2. Бибизяничи.");
+                    Console.WriteLine("3. Медведь.");
+                    Console.WriteLine("4. ПИЗДЕЦ КАКАЯ ОГРОМНАЯ МЫШЬ (габаритами с медведя).");
+                    ConsoleKeyInfo keyInfo = Console.ReadKey(intercept: true);
+                    switch (keyInfo.Key)
+                    {
+                        case ConsoleKey.D1:
+                            var tigers = new Dictionary<Func<Animal>, int>
+                            {
+                                { () => new Tiger(), _backstage._random.Next(0, 5) },
+                            };
+                            _backstage.AviaryList = _backstage.animalsRender.RenderAnimals(tigers);
+                            Console.WriteLine("Ты слышишь... Как... Кто-то... Мяукает?...");
+                            Aviary();
+                            break;
+                        case ConsoleKey.D2:
+                            var monkeys = new Dictionary<Func<Animal>, int>
+                            {
+                                { () => new Monkey(), _backstage._random.Next(0, 20) },
+                            };
+                            _backstage.AviaryList = _backstage.animalsRender.RenderAnimals(monkeys);
+                            Console.WriteLine(
+                                "Ты слышишь... Нет... Чуешь... Запах  спермы... Это точно человекоподобное...");
+                            Aviary();
+                            break;
+                        case ConsoleKey.D3:
+                            var bears = new Dictionary<Func<Animal>, int>
+                            {
+                                { () => new Bear(), _backstage._random.Next(0, 2) },
+                            };
+                            _backstage.AviaryList = _backstage.animalsRender.RenderAnimals(bears);
+                            Console.WriteLine("Ты слышишь... Как... Кто-то топотит по полу.");
+                            Aviary();
+                            break;
+                        case ConsoleKey.D4:
+                            var bigMouses = new Dictionary<Func<Animal>, int>
+                            {
+                                { () => new EternalBigMouse(), 1 },
+                            };
+                            _backstage.AviaryList = _backstage.animalsRender.RenderAnimals(bigMouses);
+                            Console.WriteLine("Ты слышишь... Как... Што-то... ОЧЕНЬ ОГРОМНОЕ... ПИЩИТ...");
+                            Aviary();
+                            break;
+                        default:
+                            Console.WriteLine("Не выбрав ничего... Ты в слезах, убегаешь в лес...");
+                            Environment.Exit(0);
+                            break;
+                    }
+                }
+            }
+        }
+
+        private void Aviary()
+        {
+            Console.Clear();
+            Console.WriteLine("Все-таки хочешь увидеть?...");
+            Console.WriteLine("Ну... Смотри! Нажми ENTER");
+
+            // Правильная проверка ввода
+            if (Console.ReadKey().Key == ConsoleKey.Enter)
+            {
+                Console.WriteLine("\n"); // Переход на новую строку
+                if (_backstage.AviaryList.Count > 0)
+                {
+                    _backstage.aviaryMethods.AnalyzeAnimals(_backstage.AviaryList);
+                }
+                else
+                {
+                    Console.WriteLine("Никого нет! ВСЕ СДОХЛИ!");
+                }
+                Console.WriteLine("Молодец! Посмотрел!");
+                Start();
+            }
+        }
+}
