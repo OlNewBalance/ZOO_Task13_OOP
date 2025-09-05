@@ -1,6 +1,6 @@
 public class AviaryMethods
 {
-    public static void AnalyzeAnimals(List<Animal> AviaryList)
+    public void AnalyzeAnimals(List<Animal> AviaryList)
     {
         if (AviaryList.Count == 0)
         {
@@ -31,7 +31,7 @@ public class AviaryMethods
 
 public class AnimalsRender
 {
-    public static List<Animal> RenderAnimals(Dictionary<Func<Animal>, int> creationRules)
+    public List<Animal> RenderAnimals(Dictionary<Func<Animal>, int> creationRules)
     {
         var animalList = new List<Animal>();
         foreach (var rule in creationRules)
