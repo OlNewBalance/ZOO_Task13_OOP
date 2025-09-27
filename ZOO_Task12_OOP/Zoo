@@ -1,0 +1,11 @@
+namespace Task12;
+
+public class Zoo
+{
+    public List<Aviary> Aviaries { get; set; } = new List<Aviary>();
+
+    public void AddAviary(Aviary aviary)
+    {
+        Aviaries.Add(aviary);
+    }
+}
