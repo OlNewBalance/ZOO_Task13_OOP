@@ -1,4 +1,4 @@
-public class AviaryMethods
+public class AviaryAnalyzer
 {
     public void AnalyzeAnimals(List<Animal> AviaryList)
     {
@@ -29,7 +29,7 @@ public class AviaryMethods
     }
 }
 
-public class AnimalsRender
+public class AnimalFactory
 {
     public List<Animal> RenderAnimals(Dictionary<Func<Animal>, int> creationRules)
     {
