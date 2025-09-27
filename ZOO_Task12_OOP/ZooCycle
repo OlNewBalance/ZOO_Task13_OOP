@@ -3,13 +3,14 @@ namespace Task12;
 public class ZooCycle
 {
     private Backstage _backstage;
+    private Zoo _zoo;
+    private Aviary _currentAviary = new Aviary();
         public ZooCycle()
         {
+            _zoo = new Zoo();
             _backstage = new Backstage();
-            
         }
         
-
         public void Start()
         {
             Console.WriteLine($"C# Version: {System.Environment.Version}");
@@ -17,6 +18,7 @@ public class ZooCycle
             string input = Console.ReadLine();
             if (input.ToLower() == "")
             {
+                _zoo.AddAviary(_currentAviary);
                 Choice();
             }
         }
@@ -43,7 +45,7 @@ public class ZooCycle
                             {
                                 { () => new Tiger(), _backstage._random.Next(0, 5) },
                             };
-                            _backstage.AviaryList = _backstage.animalsRender.RenderAnimals(tigers);
+                            _currentAviary.Animals = _backstage.animalFactory.RenderAnimals(tigers);
                             Console.WriteLine("Ты слышишь... Как... Кто-то... Мяукает?...");
                             Aviary();
                             break;
@@ -52,7 +54,7 @@ public class ZooCycle
                             {
                                 { () => new Monkey(), _backstage._random.Next(0, 20) },
                             };
-                            _backstage.AviaryList = _backstage.animalsRender.RenderAnimals(monkeys);
+                            _currentAviary.Animals = _backstage.animalFactory.RenderAnimals(monkeys);
                             Console.WriteLine(
                                 "Ты слышишь... Нет... Чуешь... Запах  спермы... Это точно человекоподобное...");
                             Aviary();
@@ -62,7 +64,7 @@ public class ZooCycle
                             {
                                 { () => new Bear(), _backstage._random.Next(0, 2) },
                             };
-                            _backstage.AviaryList = _backstage.animalsRender.RenderAnimals(bears);
+                            _currentAviary.Animals = _backstage.animalFactory.RenderAnimals(bears);
                             Console.WriteLine("Ты слышишь... Как... Кто-то топотит по полу.");
                             Aviary();
                             break;
@@ -71,7 +73,7 @@ public class ZooCycle
                             {
                                 { () => new EternalBigMouse(), 1 },
                             };
-                            _backstage.AviaryList = _backstage.animalsRender.RenderAnimals(bigMouses);
+                            _currentAviary.Animals = _backstage.animalFactory.RenderAnimals(bigMouses);
                             Console.WriteLine("Ты слышишь... Как... Што-то... ОЧЕНЬ ОГРОМНОЕ... ПИЩИТ...");
                             Aviary();
                             break;
@@ -94,9 +96,9 @@ public class ZooCycle
             if (Console.ReadKey().Key == ConsoleKey.Enter)
             {
                 Console.WriteLine("\n"); // Переход на новую строку
-                if (_backstage.AviaryList.Count > 0)
+                if (_currentAviary.Animals.Count > 0)
                 {
-                    _backstage.aviaryMethods.AnalyzeAnimals(_backstage.AviaryList);
+                    _backstage.AviaryAnalyzer.AnalyzeAnimals(_currentAviary.Animals);
                 }
                 else
                 {
